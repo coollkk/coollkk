@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>todo_app</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <style>
+        #demo {
+            font-family: 'Avenir', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: center;
+            color: #2c3e50;
+            background-color: #74b9ff;
+            height: 100vh;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <form @submit.prevent='handleSubmit'>
+            <input type="text" v-model="others">其他事項<br>
+            <span>待辦事項</span><br>
+            <input type="checkbox" value='米' v-model='todos'>
+            <label for="rice">米</label>
+            <input type="checkbox" value='加油' v-model='todos'>
+            <label for="oil">加油</label>
+            <input type="checkbox" value='鹽巴' v-model='todos'>
+            <label for="salt">鹽巴</label><br>
+            <input type="checkbox" value='醬油' v-model='todos'>
+            <label for="oiloil">醬油</label>
+            <input type="checkbox" value='醋' v-model='todos'>
+            <label for="chu">醋</label>
+            <input type="checkbox" value='飲料' v-model='todos'>
+            <label for="softdrinks">飲料</label><br>
+            <input type="checkbox" value='零食' v-model='todos'>
+            <label for="snack">零食</label>
+            <input type="checkbox" value='青菜' v-model='todos'>
+            <label for="vegetable">青菜</label>
+            <input type="checkbox" value='魚' v-model='todos'>
+            <label for="fish">魚</label><br>
+            <input type="checkbox" value='肉' v-model='todos'>
+            <label for="meat">肉</label>
+            <input type="checkbox" value='蛋' v-model='todos'>
+            <label for="egg">蛋</label>
+            <input type="checkbox" value='繳費' v-model='todos'>
+            <label for="expense">繳費</label><br>
+            <!-- <input type="submit" value="生成待辦清單"> -->
+        </form>
+        <br>
+        <div>已完成</div>
+        <div>{{todos}} {{others}}</div>
+    </div>
+
+    <script src="/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                others: '',
+                todos: []
+            },
+            methods: {
+                handleSubmit() {
+                    console.log(this.todos, this.others)
+                }
+            }
+        })
+    </script>
+</body>
+
 </html>
