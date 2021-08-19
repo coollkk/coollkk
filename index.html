@@ -50,11 +50,13 @@
             <label for="fishcan">魚罐頭</label>
             <input type="checkbox" value='繳費' v-model='todos'>
             <label for="expense">繳費</label><br>
+            <input type="checkbox" :value=otheritems[0] v-model='todos' v-if="otheritems.length>0">
+            <label for="" v-if="otheritems.length>0">{{otheritems[0]}}</label><br>
             <!-- <input type="submit" value="生成待辦清單"> -->
         </form>
         <br>
         <div>已完成</div>
-        <div>{{todos}} {{otheritems}}</div>
+        <div>{{todos}}</div>
     </div>
 
     <script src="/vue.js"></script>
