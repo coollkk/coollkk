@@ -22,7 +22,7 @@
 <body>
     <div id="demo">
         <form @submit.prevent='handleSubmit'>
-            <input type="text" v-model="others">其他事項<br>
+            <input type="text" v-model="others">其他事項 <button @click='addT()'>新增</button><br>
             <span>待辦事項</span><br>
             <input type="checkbox" value='米' v-model='todos'>
             <label for="rice">米</label>
@@ -54,7 +54,7 @@
         </form>
         <br>
         <div>已完成</div>
-        <div>{{todos}} {{others}}</div>
+        <div>{{todos}} {{otheritems}}</div>
     </div>
 
     <script src="/vue.js"></script>
@@ -62,12 +62,17 @@
         new Vue({
             el: '#demo',
             data: {
-                others: '',
-                todos: []
+                otheritems: [],
+                todos: [],
+                others: ''
             },
             methods: {
                 handleSubmit() {
                     console.log(this.todos, this.others)
+                },
+                addT(){
+                    this.otheritems.push(this.others)
+                    this.others = ''
                 }
             }
         })
