@@ -15,6 +15,16 @@
             height: 100vh;
             font-size: 28px;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            width: 800px;
+        
+        }
+        input, label{
+            padding:0 10px;
         }
     </style>
 </head>
@@ -50,13 +60,14 @@
             <label for="fishcan">魚罐頭</label>
             <input type="checkbox" value='繳費' v-model='todos'>
             <label for="expense">繳費</label><br>
-            <input type="checkbox" :value=otheritems[0] v-model='todos' v-if="otheritems.length>0">
-            <label for="" v-if="otheritems.length>0">{{otheritems[0]}}</label><br>
+            <input type="checkbox" :value=otheritem v-model='todos' v-for='(otheritem,index) in otheritems' :key='index'><br>
+            <label for="" v-for='(otheritem,index) in otheritems' :key='index'>{{otheritem}}</label><br>
             <!-- <input type="submit" value="生成待辦清單"> -->
+            <button @click='deleteT()'>刪除</button>
+            <div>已完成</div>
+            <div>{{todos}}</div>
         </form>
         <br>
-        <div>已完成</div>
-        <div>{{todos}}</div>
     </div>
 
     <script src="/vue.js"></script>
@@ -64,9 +75,23 @@
         new Vue({
             el: '#demo',
             data: {
-                otheritems: [],
-                todos: [],
+                otheritems: JSON.parse(window.localStorage.getItem('otheritems_key')|| '[]'),
+                todos: JSON.parse(window.localStorage.getItem('todos_key')|| '[]'),
                 others: ''
+            },
+            watch: {
+                      todos: {
+                          deep: true,
+                          handler: function(value) {
+                              window.localStorage.setItem('todos_key',JSON.stringify(value))
+                          }
+                      },
+                      otheritems: {
+                          deep: true,
+                          handler: function(value) {
+                              window.localStorage.setItem('otheritems_key',JSON.stringify(value))
+                          }
+                      }
             },
             methods: {
                 handleSubmit() {
@@ -75,6 +100,9 @@
                 addT(){
                     this.otheritems.push(this.others)
                     this.others = ''
+                },
+                deleteT() {
+                    this.otheritems.pop()
                 }
             }
         })
