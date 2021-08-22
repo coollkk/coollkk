@@ -98,8 +98,10 @@
                     console.log(this.todos, this.others)
                 },
                 addT(){
-                    this.otheritems.push(this.others)
-                    this.others = ''
+                     if(this.others!==''){
+                        this.otheritems.push(this.others)
+                        this.others = ''
+                    }
                 },
                 deleteT() {
                     this.otheritems.pop()
